@@ -6,26 +6,39 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import static android.os.SystemClock.sleep;
 
 public class MainActivity extends AppCompatActivity {
     private AlarmManager am;
     private ToggleButton _toggleSun, _toggleMon, _toggleTue, _toggleWed, _toggleThu, _toggleFri, _toggleSat;
+    public TimePicker timePicker;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         _toggleSun = (ToggleButton) findViewById(R.id.toggle_sun);
@@ -36,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         _toggleFri = (ToggleButton) findViewById(R.id.toggle_fri);
         _toggleSat = (ToggleButton) findViewById(R.id.toggle_sat);
 
-
+        timePicker = (TimePicker) findViewById(R.id.timeP);
 
     }
 
@@ -51,10 +64,15 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         //cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + 10);
 
-        long oneday = 24 * 60 * 60 * 1000;
+        cal.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+        cal.set(Calendar.MINUTE, timePicker.getMinute());
 
-        am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), oneday, pIntent);
+        //long oneday = 24 * 60 * 60 * 1000;
+        long interval = 1000 * 60 *2; //2분마다 실행이된다.
+        am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), interval, pIntent);
     }
+
+
 
     public void onUnregist(View v)
     {
@@ -64,5 +82,4 @@ public class MainActivity extends AppCompatActivity {
         am.cancel(pIntent);
     }
 }
-
 

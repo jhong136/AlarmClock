@@ -4,7 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <TimePicker
+        android:id="@+id/timeP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        />
+
+
 
     <Button
         android:id="@+id/button1"
@@ -83,9 +93,5 @@
             android:textOn="토" />
     </LinearLayout>
 
-    <TextView
-        android:text="문자변환"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>
 
