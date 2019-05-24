@@ -1,5 +1,6 @@
 package com.example.junny_pc.alarmclock;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -123,42 +124,43 @@ public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
         if(arrival.getPredictTime1()==null) return;
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "default");
-        builder.setSmallIcon(R.drawable.ic_candidate2);
-        builder.setContentTitle("버스 도착 예정 알람");
-        builder.setContentText("720-1번 버스가 " + arrival.getPredictTime1() +"분 후에 도착예정");
-        builder.setAutoCancel(true); //사용자가 눌렀을 때 그냥 노티 날아간다
-        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "default");
+//        builder.setSmallIcon(R.drawable.ic_candidate2);
+//        builder.setContentTitle("버스 도착 예정 알람");
+//        builder.setContentText("720-1번 버스가 " + arrival.getPredictTime1() +"분 후에 도착예정");
+//        builder.setAutoCancel(true); //사용자가 눌렀을 때 그냥 노티 날아간다
+//        builder.setPriority(NotificationCompat.PRIORITY_MAX);
+//
+//
+//        Intent intent1 = new Intent(mContext, MainActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        builder.setContentIntent(pendingIntent);
+//
+//        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION);
+//        builder.setSound(ringtoneUri);
+//
+//        long[] vibrate = {0, 100, 200, 300};
+//        builder.setVibrate(vibrate);
+
+//        AlertDialog.Builder dlg = new AlertDialog.Builder(mContext);
+//        dlg.setTitle("버스도착 알람");
+//        dlg.setMessage("720-1버스가 " + arrival.getPredictTime1() +"분 안에 도착합니다.");
+//        dlg.setIcon(R.drawable.aramicon);
+//        dlg.show();
+
+        Intent intent = new Intent(mContext, dialog_activity.class);
+
+        mContext.startActivity(intent);
+
+        //화면 표기때문에 intent.putExtra로 값을 좀 넣어서 넘겨주면 될 것 같음
 
 
-        System.out.println(arrival.getPredictTime1());
-        System.out.println(arrival.getPredictTime2());
-        System.out.println(arrival.getRouteId());
-        System.out.println(arrival.getStationId());
 
-
-        Intent intent1 = new Intent(mContext, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        builder.setContentIntent(pendingIntent);
-
-        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(mContext, RingtoneManager.TYPE_NOTIFICATION);
-        builder.setSound(ringtoneUri);
-
-        long[] vibrate = {0, 100, 200, 300};
-        builder.setVibrate(vibrate);
-
-
-        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE );
-        PowerManager.WakeLock wakeLock = pm.newWakeLock( PowerManager.SCREEN_DIM_WAKE_LOCK
-                | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG" );
-        wakeLock.acquire(3000);
-
-
-        NotificationManager notificationManager =
-                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본채널", NotificationManager.IMPORTANCE_HIGH));
-        notificationManager.notify(1, builder.build());
+//        NotificationManager notificationManager =
+//                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+//        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본채널", NotificationManager.IMPORTANCE_HIGH));
+//        notificationManager.notify(1, builder.build());
 
 
     }

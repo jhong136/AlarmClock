@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         cal.set(Calendar.MINUTE, timePicker.getMinute());
 
         //long oneday = 24 * 60 * 60 * 1000;
-        long interval = 1000 * 60 *2; //2분마다 실행이된다.
+        long interval = 1000 * 60; //1분마다 실행이된다. 2분은 뒤에 *2하면 됨
         am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), interval, pIntent);
+
     }
 
 
