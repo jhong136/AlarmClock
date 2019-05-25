@@ -1,16 +1,8 @@
 package com.example.junny_pc.alarmclock;
 
-import android.app.AlertDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.PowerManager;
-import android.support.v4.app.NotificationCompat;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -18,30 +10,23 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
- * Created by absin on 2019-05-23.
+ * Created by Junny_PC on 2019-05-25.
  */
 
-
 public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
-
     final String TAG = "MainActivity";
     public String dataKey = "vgOxwLDnBL1K%2B0EV%2FG7Yi%2Bge%2BwfXMB66UwEnnmJEUuoej7Zg75Z85lE7wOcYZcysMUq5Sa2VGKzNsczJqzgg9A%3D%3D";
     private String requestUrl;
-    station_arrive arrival = new station_arrive();
+    ArrivedBus arrival = new ArrivedBus();
     String keyword1, keyword2, keyword3;
     //stationId, routeId, staOrder
 
-
-
-
-
     private Context mContext;
 
-    public MyAsyncTask_alarm(Context context, String keyword1, String keyword2, String keyword3) {
 
+    public MyAsyncTask_alarm(Context context, String keyword1, String keyword2, String keyword3) {
         mContext = context;
         this.keyword1 = keyword1;
         this.keyword2 = keyword2;
@@ -50,10 +35,7 @@ public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-
-
         requestUrl = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice?serviceKey=" + dataKey + "&stationId=" + keyword1 + "&routeId=" + keyword2 + "&staOrder=" + keyword3;
-
 
         try {
             boolean b_predictTime1 = false;
@@ -61,13 +43,11 @@ public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
             boolean b_routeId = false;
             boolean b_stationId = false;
 
-
             URL url = new URL(requestUrl);
             InputStream is = url.openStream();
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = factory.newPullParser();
             parser.setInput(new InputStreamReader(is, "UTF-8"));
-
 
             int eventType = parser.getEventType();
 
@@ -111,13 +91,12 @@ public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
         }
 
         System.out.println("시행1");
-
         return null;
     }
 
     @Override
-    protected void onPostExecute(String string) {
-        super.onPostExecute(string);
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
 
         System.out.println("시행2");
 
@@ -149,19 +128,17 @@ public class MyAsyncTask_alarm extends AsyncTask<String, Void, String> {
 //        dlg.setIcon(R.drawable.aramicon);
 //        dlg.show();
 
-        Intent intent = new Intent(mContext, dialog_activity.class);
+        Intent intent = new Intent(mContext, DialogActivity.class);
 
         mContext.startActivity(intent);
 
         //화면 표기때문에 intent.putExtra로 값을 좀 넣어서 넘겨주면 될 것 같음
 
 
-
 //        NotificationManager notificationManager =
 //                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 //        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본채널", NotificationManager.IMPORTANCE_HIGH));
 //        notificationManager.notify(1, builder.build());
-
 
     }
 }

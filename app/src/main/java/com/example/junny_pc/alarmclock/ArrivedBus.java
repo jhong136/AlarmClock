@@ -4,9 +4,7 @@ package com.example.junny_pc.alarmclock;
  * Created by absin on 2019-05-22.
  */
 
-public class station_arrive {
-
-
+public class ArrivedBus {
         String predictTime1;
         String predictTime2;
         String routeId; // 노선아이디 aka 버스 번호
@@ -21,7 +19,4 @@ public class station_arrive {
         public void setPredictTime2(String predictTime2) { this.predictTime2 = predictTime2; }
         public void setRouteId(String routeId) { this.routeId = routeId; }
         public void setStationId(String stationId) { this.stationId = stationId; }
-
-
-
 }

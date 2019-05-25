@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE"/>
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_candidate2"
@@ -18,6 +16,11 @@
 
         <receiver android:name="AlarmReceiver" />
 
+        <activity android:name=".GetAlarmInfo"/>
+
+        <activity android:name=".DialogActivity"
+            android:noHistory="true"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".dialog_activity"
-            android:noHistory="true"/>
-
-
     </application>
 
 </manifest>
